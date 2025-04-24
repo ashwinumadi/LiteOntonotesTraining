@@ -5,12 +5,12 @@ import os
 path = os.getcwd()
 
 # input data dir
-dataset_path = os.path.join(path, 'release/crowd')
+dataset_path = os.path.join(path, 'release/ontonotes')
 # output data dir
 processed_dataset_path = os.path.join(path, 'processed_data')
 os.mkdir(processed_dataset_path)
 #  type vocab file
-type_vocab_file_path = os.path.join(path, 'release/ontology/types.txt')
+type_vocab_file_path = os.path.join(path, 'release/ontology/onto_ontology.txt')
 
 
 # Load and process typing vocabulary
@@ -27,7 +27,7 @@ with open(processed_vocab_file_path, 'w+') as fout:
 
 # process test, dev, train
 for file in ['test', 'dev', 'train']:
-    in_file_name = os.path.join(dataset_path, f'{file}.json')
+    in_file_name = os.path.join(dataset_path, f'g_{file}.json')
     out_file_name = os.path.join(processed_dataset_path, f'{file}_processed.json')
     # load and process data
     data_lst = []

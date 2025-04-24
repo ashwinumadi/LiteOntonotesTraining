@@ -14,7 +14,8 @@ import time
 import random
 import json
 from transformers import RobertaForSequenceClassification, RobertaConfig
-from transformers import AutoTokenizer, AdamW
+from transformers import AutoTokenizer
+from torch.optim import AdamW
 from model import roberta_mnli_typing
 
 logger = logging.getLogger(__name__)
@@ -24,7 +25,7 @@ pretrained_model = "roberta-large-mnli"
   Model
 """
 
-def train(args, train_dataset, model, tokenizer):
+def train(args, train_dataset, model, tokenizer, resume_epoch=0):
     train_sampler = RandomSampler(train_dataset)
     train_dataloader = DataLoader(train_dataset, sampler=train_sampler, batch_size=args.train_batch_size,
                                   collate_fn=lambda x: zip(*x))
@@ -39,16 +40,26 @@ def train(args, train_dataset, model, tokenizer):
 
     margin_criterion = torch.nn.MarginRankingLoss(margin=args.margin).to(args.device)
     optimizer = AdamW(optimizer_grouped_parameters, lr=args.learning_rate)
+    #### start
+    if args.resume_from_checkpoint:
+        checkpoint = torch.load(args.resume_from_checkpoint)
+        model.load_state_dict(checkpoint['model'])
+        optimizer.load_state_dict(checkpoint['optimizer'])
+        logging.info(f"*** Loaded checkpoint from {args.resume_from_checkpoint} ***")
 
+    train_iterator = trange(resume_epoch, resume_epoch+int(args.num_train_epochs), desc="Epoch")
+    #### end
     # Start Training
     logger.info("***** Starting training *****")
     logger.info("  Num examples = %d", len(train_dataset))
     logger.info("  Num Epochs = %d", args.num_train_epochs)
     logger.info("  Batch Size = %d", args.train_batch_size)
 
-    global_step = 0
+    #### start
+    global_step = resume_epoch
+    #### end
     model.zero_grad()
-    train_iterator = trange(int(args.num_train_epochs), desc="Epoch")
+    #train_iterator = trange(int(args.num_train_epochs), desc="Epoch")
 
     for _ in train_iterator:
         epoch_iterator = tqdm(train_dataloader, desc="Iteration")
@@ -144,10 +155,12 @@ def train(args, train_dataset, model, tokenizer):
             loss_stat.append(loss.data.cpu().numpy())
 
         global_step += 1
+        #global_step = epoch + 1
         logging.info(f'finished with loss ={np.average(loss_stat)}\n')
 
         if global_step > 0 and global_step % args.save_epochs == 0:
             checkpoint_dir = os.path.join(args.model_saving_path, f'epochs{global_step}')
+            
             os.mkdir(checkpoint_dir)
             saving_checkpoint = {
                 'model': model.state_dict(),
@@ -207,6 +220,19 @@ def main():
                         type=float,
                         help="Weight deay of the optimizer.")
 
+    #### start
+    parser.add_argument("--resume_from_checkpoint",
+                    type=str,
+                    default=None,
+                    help="Path to checkpoint file to resume training from")
+
+    parser.add_argument("--resume_epoch",
+                    type=int,
+                    default=0,
+                    help="Epoch number to resume from")
+    #### end
+
+
     args = parser.parse_args()
 
     if not os.path.exists(args.output_dir):
@@ -248,8 +274,8 @@ def main():
                                   os.path.join(args.data_dir, "types.txt"))
 
     # train
-    train(args, train_dataset, model, tokenizer)
-
+    #train(args, train_dataset, model, tokenizer)
+    train(args, train_dataset, model, tokenizer, resume_epoch=args.resume_epoch)
 
 if __name__ == "__main__":
     main()

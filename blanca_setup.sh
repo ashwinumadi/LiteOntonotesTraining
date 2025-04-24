@@ -12,16 +12,31 @@ module purge
 
 module load anaconda
 module load cuda/12.1.1
-cd /scratch/alpine/asum8093/LiteOntonotesTraining
+cd /scratch/alpine/asum8093/LiteOntonotesTraining/LiteOntonotesTraining/data/
 conda activate py38-pt1131-cuda117
 
 echo "== This is the scripting step! =="
 
 #pip install datasets
 
-wget http://nlp.cs.washington.edu/entity_type/data/ultrafine_acl18.tar.gz
+!python process_ultrafine.py
+cd ../
+data_dir="data/processed_data"
+output_dir="output"
+device=0
 
-tar -xvzf ultrafine_acl18.tar.gz
+!python3 lite.py --data_dir "data/processed_data" \
+                             --output_dir "output" \
+                             --train_batch_size 16 \
+                             --num_train_epochs 1 \
+                             --margin 0.1 \
+                             --save_epochs 1 \
+                             --learning_rate 1e-6 \
+                             --lamb 0.05
+
+#wget http://nlp.cs.washington.edu/entity_type/data/ultrafine_acl18.tar.gz
+
+#tar -xvzf ultrafine_acl18.tar.gz
 
 #python run_code.py 
 
