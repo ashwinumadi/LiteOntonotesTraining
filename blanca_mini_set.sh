@@ -41,7 +41,7 @@ device=0
 
 python3 eval.py \
                              --model_dir "./model_dir" \
-                             --eval_data_path "/data/small_processed_data/dev_processed.json" \
+                             --eval_data_path "./data/small_processed_data/dev_processed.json" \
                              --type_vocab_file "./data/small_processed_data/types.txt" \
                              --batch 4
 
