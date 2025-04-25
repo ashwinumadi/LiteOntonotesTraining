@@ -27,14 +27,29 @@ data_dir="data/small_processed_data"
 output_dir="small_output"
 device=0
 
-python3 lite.py --data_dir "data/small_processed_data" \
-                             --output_dir "small_output" \
-                             --train_batch_size 4 \
-                             --num_train_epochs 100 \
-                             --margin 0.1 \
-                             --save_epochs 10 \
-                             --learning_rate 1e-6 \
-                             --lamb 0.05
+#python3 lite.py --data_dir "data/small_processed_data" \
+#                             --output_dir "small_output" \
+#                             --train_batch_size 4 \
+#                             --num_train_epochs 100 \
+#                             --margin 0.1 \
+#                             --save_epochs 10 \
+#                             --learning_rate 1e-6 \
+#                             --lamb 0.05
+
+mkdir model_dir
+mv /small_output/16_18_50_Apr_24_2025_batch4_margin0.1_lr1e-06lambda0.05/epochs100/model ./model_dir/model
+
+python3 eval.py \
+                             --model_dir "./model_dir" \
+                             --eval_data_path "./data/small_processed_data/dev_processed.json" \
+                             --test_data_path "./data/small_processed_data/test_processed.json" \
+                             --type_vocab_file "./data/small_processed_data/types.txt" \
+                             --batch 4
+
+python3 result.py --dev "./model_dir/Evaluation_dev_processed.json" \
+                   --test "./model_dir/Evaluation_test_processed.json" \
+                   --model_dir "./model_dir/" \
+                   --threshold_step 0.05
 
 #wget http://nlp.cs.washington.edu/entity_type/data/ultrafine_acl18.tar.gz
 
