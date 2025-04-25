@@ -41,7 +41,7 @@ data_dir="data/processed_data"
 output_dir="output"
 device=0
 
-!python3 lite.py --data_dir "data/processed_data" \
+python3 lite.py --data_dir "data/processed_data" \
                              --output_dir "output" \
                              --train_batch_size 16 \
                              --num_train_epochs 4 \
