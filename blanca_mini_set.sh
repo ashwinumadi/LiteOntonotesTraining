@@ -37,11 +37,11 @@ device=0
 #                             --lamb 0.05
 
 mkdir model_dir
-mv /small_output/16_18_50_Apr_24_2025_batch4_margin0.1_lr1e-06lambda0.05/epochs100/model ./model_dir/model
+mv ./small_output/16_18_50_Apr_24_2025_batch4_margin0.1_lr1e-06lambda0.05/epochs100/model ./model_dir/model
 
 python3 eval.py \
                              --model_dir "./model_dir" \
-                             --eval_data_path "./data/small_processed_data/dev_processed.json" \
+                             --eval_data_path "/data/small_processed_data/dev_processed.json" \
                              --test_data_path "./data/small_processed_data/test_processed.json" \
                              --type_vocab_file "./data/small_processed_data/types.txt" \
                              --batch 4
