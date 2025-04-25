@@ -37,7 +37,7 @@ device=0
 #                             --lamb 0.05
 
 #mkdir model_dir
-mv ./small_output/16_18_50_Apr_24_2025_batch4_margin0.1_lr1e-06lambda0.05/epochs100/model ./model_dir/model
+mv /scratch/alpine/asum8093/LiteOntonotesTraining/LiteOntonotesTraining/small_output/16_18_50_Apr_24_2025_batch4_margin0.1_lr1e-06lambda0.05/epochs100/model ./model_dir/model
 
 python3 eval.py \
                              --model_dir "./model_dir" \
