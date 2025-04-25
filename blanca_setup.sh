@@ -12,27 +12,45 @@ module purge
 
 module load anaconda
 module load cuda/12.1.1
-cd /scratch/alpine/asum8093/LiteOntonotesTraining/LiteOntonotesTraining/data/
+#cd /scratch/alpine/asum8093/LiteOntonotesTraining/LiteOntonotesTraining/data/
+cd /scratch/alpine/asum8093/LiteOntonotesTraining/LiteOntonotesTraining/
+
 conda activate py38-pt1131-cuda117
 
 echo "== This is the scripting step! =="
 
 #pip install datasets
 
-python process_ultrafine.py
-cd ../
+#python process_ultrafine.py
+#cd ../
+
+#data_dir="data/processed_data"
+#output_dir="output"
+#device=0
+
+#python3 lite.py --data_dir "data/processed_data" \
+#                             --output_dir "output" \
+#                             --train_batch_size 4 \
+#                             --num_train_epochs 1 \
+#                             --margin 0.1 \
+#                             --save_epochs 1 \
+#                             --learning_rate 1e-6 \
+#                             --lamb 0.05
+
 data_dir="data/processed_data"
 output_dir="output"
 device=0
 
-python3 lite.py --data_dir "data/processed_data" \
+!python3 lite.py --data_dir "data/processed_data" \
                              --output_dir "output" \
-                             --train_batch_size 4 \
-                             --num_train_epochs 1 \
+                             --train_batch_size 16 \
+                             --num_train_epochs 4 \
                              --margin 0.1 \
-                             --save_epochs 1 \
+                             --save_epochs 2 \
                              --learning_rate 1e-6 \
-                             --lamb 0.05
+                             --lamb 0.05 \
+                             --resume_from_checkpoint output/15_48_37_Apr_24_2025_batch4_margin0.1_lr1e-06lambda0.05/epochs1/model \
+                             --resume_epoch 1
 
 #wget http://nlp.cs.washington.edu/entity_type/data/ultrafine_acl18.tar.gz
 
