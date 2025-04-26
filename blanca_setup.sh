@@ -41,33 +41,33 @@ data_dir="data/processed_data"
 output_dir="output"
 device=0
 
-#python3 lite.py --data_dir "data/processed_data" \
-#                             --output_dir "output" \
-#                             --train_batch_size 2 \
-#                             --num_train_epochs 4 \
-#                             --margin 0.1 \
-#                             --save_epochs 2 \
-#                             --learning_rate 1e-6 \
-#                             --lamb 0.05 \
-#                             --resume_from_checkpoint output/15_48_37_Apr_24_2025_batch4_margin0.1_lr1e-06lambda0.05/epochs1/model \
-#                             --resume_epoch 1
+python3 lite.py --data_dir "data/processed_data" \
+                             --output_dir "output" \
+                             --train_batch_size 2 \
+                             --num_train_epochs 2 \
+                             --margin 0.1 \
+                             --save_epochs 2 \
+                             --learning_rate 1e-6 \
+                             --lamb 0.05 \
+                             --resume_from_checkpoint model_dir/model \
+                             --resume_epoch 4
 
-python3 eval.py \
-                             --model_dir "./model_dir" \
-                             --eval_data_path "./data/processed_data/dev_processed.json" \
-                             --type_vocab_file "./data/processed_data/types.txt" \
-                             --batch 4
+#python3 eval.py \
+#                             --model_dir "./model_dir" \
+#                             --eval_data_path "./data/processed_data/dev_processed.json" \
+#                             --type_vocab_file "./data/processed_data/types.txt" \
+#                             --batch 4
 
-python3 eval.py \
-                             --model_dir "./model_dir" \
-                             --eval_data_path "./data/processed_data/test_processed.json" \
-                             --type_vocab_file "./data/processed_data/types.txt" \
-                             --batch 4
+#python3 eval.py \
+#                             --model_dir "./model_dir" \
+#                             --eval_data_path "./data/processed_data/test_processed.json" \
+#                             --type_vocab_file "./data/processed_data/types.txt" \
+#                             --batch 4
 
-python3 result.py --dev "./model_dir/Evaluation_dev_processed.json" \
-                   --test "./model_dir/Evaluation_test_processed.json" \
-                   --model_dir "./model_dir/" \
-                   --threshold_step 0.05
+#python3 result.py --dev "./model_dir/Evaluation_dev_processed.json" \
+#                   --test "./model_dir/Evaluation_test_processed.json" \
+#                   --model_dir "./model_dir/" \
+#                   --threshold_step 0.05
 
 #wget http://nlp.cs.washington.edu/entity_type/data/ultrafine_acl18.tar.gz
 
