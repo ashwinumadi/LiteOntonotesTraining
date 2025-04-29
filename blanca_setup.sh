@@ -44,13 +44,13 @@ device=0
 python3 lite.py --data_dir "data/processed_data" \
                              --output_dir "output" \
                              --train_batch_size 2 \
-                             --num_train_epochs 2 \
+                             --num_train_epochs 8 \
                              --margin 0.1 \
                              --save_epochs 2 \
                              --learning_rate 1e-6 \
                              --lamb 0.05 \
                              --resume_from_checkpoint model_dir/model \
-                             --resume_epoch 4
+                             --resume_epoch 6
 
 #python3 eval.py \
 #                             --model_dir "./model_dir" \
