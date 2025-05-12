@@ -4,7 +4,7 @@
 #SBATCH --time=24:00:00
 #SBATCH --partition=blanca-curc-gpu
 #SBATCH --gres=gpu:1
-#SBATCH --output=run_code_epoch10-%j.out
+#SBATCH --output=run_code_epoch9-%j.out
 #SBATCH --mail-type="ALL"
 #SBATCH --mail-user="asum8093@colorado.edu"
 
@@ -44,9 +44,9 @@ device=0
 python3 lite.py --data_dir "data/processed_data" \
                              --output_dir "output" \
                              --train_batch_size 2 \
-                             --num_train_epochs 10 \
+                             --num_train_epochs 9 \
                              --margin 0.1 \
-                             --save_epochs 2 \
+                             --save_epochs 1 \
                              --learning_rate 1e-6 \
                              --lamb 0.05 \
                              --resume_from_checkpoint model_dir/big_model_8_epoch/model \
