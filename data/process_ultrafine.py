@@ -27,7 +27,7 @@ with open(processed_vocab_file_path, 'w+') as fout:
 
 # process test, dev, train
 for file in ['test_split_q1.json', 'test_split_q1.json', 'test_split_q1.json', 'test_split_q1.json']:
-    in_file_name = os.path.join(dataset_path, f'g_{file}')
+    in_file_name = os.path.join(dataset_path, f'{file}')
     out_file_name = os.path.join(processed_dataset_path, f'{file}_processed')
     # load and process data
     data_lst = []
