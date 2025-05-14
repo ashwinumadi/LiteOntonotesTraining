@@ -21,11 +21,11 @@ echo "== This is the scripting step! =="
 
 #pip install datasets
 
-#python process_ultrafine.py
+python process_ultrafine.py
 #cd ../
-data_dir="data/small_processed_data"
-output_dir="small_output"
-device=0
+#data_dir="data/small_processed_data"
+#output_dir="small_output"
+#device=0
 
 #python3 lite.py --data_dir "data/small_processed_data" \
 #                             --output_dir "small_output" \
@@ -45,16 +45,16 @@ device=0
 #                             --type_vocab_file "./data/small_processed_data/types.txt" \
 #                             --batch 4
 
-python3 eval.py \
-                             --model_dir "./model_dir" \
-                             --eval_data_path "./data/small_processed_data/test_processed.json" \
-                             --type_vocab_file "./data/small_processed_data/types.txt" \
-                             --batch 4
+#python3 eval.py \
+#                             --model_dir "./model_dir/small_model_100_epoch/" \
+#                             --eval_data_path "./data/small_processed_data/test_processed.json" \
+#                             --type_vocab_file "./data/small_processed_data/types.txt" \
+#                             --batch 4
 
-python3 result.py --dev "./model_dir/Evaluation_dev_processed.json" \
-                   --test "./model_dir/Evaluation_test_processed.json" \
-                   --model_dir "./model_dir/" \
-                   --threshold_step 0.05
+#python3 result.py --dev "./model_dir/Evaluation_dev_processed.json" \
+#                   --test "./model_dir/Evaluation_test_processed.json" \
+#                   --model_dir "./model_dir/small_model_100_epoch/" \
+#                   --threshold_step 0.05
 
 #wget http://nlp.cs.washington.edu/entity_type/data/ultrafine_acl18.tar.gz
 

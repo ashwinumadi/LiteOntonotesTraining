@@ -5,9 +5,9 @@ import os
 path = os.getcwd()
 
 # input data dir
-dataset_path = os.path.join(path, 'release/ontonotes')
+dataset_path = os.path.join(path, '../bins_data/') #dataset_path = os.path.join(path, 'release/ontonotes')
 # output data dir
-processed_dataset_path = os.path.join(path, 'processed_data')
+processed_dataset_path = os.path.join(path, 'bins_processed_data')
 os.mkdir(processed_dataset_path)
 #  type vocab file
 type_vocab_file_path = os.path.join(path, 'release/ontology/onto_ontology.txt')
@@ -26,9 +26,9 @@ with open(processed_vocab_file_path, 'w+') as fout:
     fout.write('\n'.join(typing_vocab))
 
 # process test, dev, train
-for file in ['test', 'dev', 'train']:
-    in_file_name = os.path.join(dataset_path, f'g_{file}.json')
-    out_file_name = os.path.join(processed_dataset_path, f'{file}_processed.json')
+for file in ['test_split_q1.json', 'test_split_q1.json', 'test_split_q1.json', 'test_split_q1.json']:
+    in_file_name = os.path.join(dataset_path, f'g_{file}')
+    out_file_name = os.path.join(processed_dataset_path, f'{file}_processed')
     # load and process data
     data_lst = []
     idx = 0
