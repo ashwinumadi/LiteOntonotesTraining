@@ -26,9 +26,9 @@ with open(processed_vocab_file_path, 'w+') as fout:
     fout.write('\n'.join(typing_vocab))
 
 # process test, dev, train
-for file in ['test_split_q1.json', 'test_split_q1.json', 'test_split_q1.json', 'test_split_q1.json']:
-    in_file_name = os.path.join(dataset_path, f'{file}')
-    out_file_name = os.path.join(processed_dataset_path, f'{file}_processed')
+for file in ['test_split_q1', 'test_split_q2', 'test_split_q3', 'test_split_q4']:
+    in_file_name = os.path.join(dataset_path, f'{file}.json')
+    out_file_name = os.path.join(processed_dataset_path, f'{file}_processed.json')
     # load and process data
     data_lst = []
     idx = 0
