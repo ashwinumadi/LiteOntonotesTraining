@@ -20,8 +20,11 @@ conda activate py38-pt1131-cuda117
 echo "== This is the scripting step! =="
 
 #pip install datasets
+cd data/
 
-python process_ultrafine.py
+ls
+
+python ./process_ultrafine.py
 #cd ../
 #data_dir="data/small_processed_data"
 #output_dir="small_output"
