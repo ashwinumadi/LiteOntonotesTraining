@@ -20,15 +20,15 @@ conda activate py38-pt1131-cuda117
 echo "== This is the scripting step! =="
 
 #pip install datasets
-cd data/
+#cd data/
 
-ls
+#ls
 
-python ./process_ultrafine.py
+#python ./process_ultrafine.py
 #cd ../
-#data_dir="data/small_processed_data"
-#output_dir="small_output"
-#device=0
+data_dir="data/small_processed_data"
+output_dir="small_output"
+device=0
 
 #python3 lite.py --data_dir "data/small_processed_data" \
 #                             --output_dir "small_output" \
@@ -48,16 +48,66 @@ python ./process_ultrafine.py
 #                             --type_vocab_file "./data/small_processed_data/types.txt" \
 #                             --batch 4
 
-#python3 eval.py \
-#                             --model_dir "./model_dir/small_model_100_epoch/" \
-#                             --eval_data_path "./data/small_processed_data/test_processed.json" \
-#                             --type_vocab_file "./data/small_processed_data/types.txt" \
-#                             --batch 4
+python3 eval.py \
+                             --model_dir "./model_dir/small_model_100_epoch/" \
+                             --eval_data_path "./data/bins_processed_data/test_split_q1_processed.json" \
+                             --type_vocab_file "./data/bins_processed_data/types.txt" \
+                             --batch 4
 
-#python3 result.py --dev "./model_dir/Evaluation_dev_processed.json" \
-#                   --test "./model_dir/Evaluation_test_processed.json" \
-#                   --model_dir "./model_dir/small_model_100_epoch/" \
-#                   --threshold_step 0.05
+echo "=============== DDEV 1 ========================="
+
+
+python3 eval.py \
+                             --model_dir "./model_dir/small_model_100_epoch/" \
+                             --eval_data_path "./data/bins_processed_data/test_split_q2_processed.json" \
+                             --type_vocab_file "./data/bins_processed_data/types.txt" \
+                             --batch 4
+
+echo "=============== DDEV 2 ========================="
+
+python3 eval.py \
+                             --model_dir "./model_dir/small_model_100_epoch/" \
+                             --eval_data_path "./data/bins_processed_data/test_split_q3_processed.json" \
+                             --type_vocab_file "./data/bins_processed_data/types.txt" \
+                             --batch 4
+
+echo "=============== DDEV 3 ========================="
+
+python3 eval.py \
+                             --model_dir "./model_dir/small_model_100_epoch/" \
+                             --eval_data_path "./data/bins_processed_data/test_split_q4_processed.json" \
+                             --type_vocab_file "./data/bins_processed_data/types.txt" \
+                             --batch 4
+
+echo "== End of Eval code =="
+
+python3 result.py --dev "./model_dir/small_model_100_epoch/Evaluation_dev_processed.json" \
+                   --test "./model_dir/small_model_100_epoch/Evaluation_test_split_q1_processed.json" \
+                   --model_dir "./model_dir/small_model_100_epoch/" \
+                   --threshold_step 0.05
+
+echo "=============== TEST 1 ========================="
+
+python3 result.py --dev "./model_dir/small_model_100_epoch/Evaluation_dev_processed.json" \
+                   --test "./model_dir/small_model_100_epoch/Evaluation_test_split_q2_processed.json" \
+                   --model_dir "./model_dir/small_model_100_epoch/" \
+                   --threshold_step 0.05
+
+echo "=============== TEST 2 ========================="
+
+python3 result.py --dev "./model_dir/small_model_100_epoch/Evaluation_dev_processed.json" \
+                   --test "./model_dir/small_model_100_epoch/Evaluation_test_split_q3_processed.json" \
+                   --model_dir "./model_dir/small_model_100_epoch/" \
+                   --threshold_step 0.05
+
+echo "=============== TEST 3 ========================="
+
+python3 result.py --dev "./model_dir/small_model_100_epoch/Evaluation_dev_processed.json" \
+                   --test "./model_dir/small_model_100_epoch/Evaluation_test_split_q4_processed.json" \
+                   --model_dir "./model_dir/small_model_100_epoch/" \
+                   --threshold_step 0.05
+
+echo "=============== TEST 4 ========================="
 
 #wget http://nlp.cs.washington.edu/entity_type/data/ultrafine_acl18.tar.gz
 
