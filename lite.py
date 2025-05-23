@@ -25,7 +25,7 @@ pretrained_model = "roberta-large-mnli"
   Model
 """
 
-def train(args, train_dataset, model, tokenizer, resume_epoch=0):
+def train(args, train_dataset, model, tokenizer, resume_epoch=0, resume_step=0):
     train_sampler = RandomSampler(train_dataset)
     train_dataloader = DataLoader(train_dataset, sampler=train_sampler, batch_size=args.train_batch_size,
                                   collate_fn=lambda x: zip(*x))
@@ -57,6 +57,10 @@ def train(args, train_dataset, model, tokenizer, resume_epoch=0):
 
     #### start
     global_step = resume_epoch
+    global_batch_step = resume_step  # new
+
+    # For resuming from step
+    skip_batches = resume_step if resume_epoch == int(args.resume_epoch) else 0
     #### end
     model.zero_grad()
     #train_iterator = trange(int(args.num_train_epochs), desc="Epoch")
@@ -65,6 +69,9 @@ def train(args, train_dataset, model, tokenizer, resume_epoch=0):
         epoch_iterator = tqdm(train_dataloader, desc="Iteration")
         loss_stat = []
         for step, batch in enumerate(epoch_iterator):
+            if skip_batches > 0:
+                skip_batches -= 1
+                continue
             model.train()
             premise_lst, entity_lst, pos_lst, pos_general_lst, pos_fine_lst, pos_ultrafine_lst, _ = [list(item) for item in batch]
             dat_true = []
@@ -149,6 +156,23 @@ def train(args, train_dataset, model, tokenizer, resume_epoch=0):
 
                 loss += args.lamb * loss_depend
 
+            #start
+            global_batch_step += 1
+
+            if global_batch_step % args.save_steps == 0:
+                checkpoint_dir = os.path.join(args.model_saving_path, f'epoch{global_step}_step{global_batch_step}')
+                os.makedirs(checkpoint_dir, exist_ok=True)
+                saving_checkpoint = {
+                    'model': model.state_dict(),
+                    'optimizer': optimizer.state_dict(),
+                    'epoch': global_step,
+                    'step': global_batch_step
+                }
+                checkpoint_path = os.path.join(checkpoint_dir, 'model')
+                torch.save(saving_checkpoint, checkpoint_path)
+                logging.info(f"*** Saved batch checkpoint to {checkpoint_path} ***")
+            #end
+
             optimizer.zero_grad()
             loss.backward()
             optimizer.step()
@@ -230,6 +254,15 @@ def main():
                     type=int,
                     default=0,
                     help="Epoch number to resume from")
+    
+    parser.add_argument("--save_steps",
+                    default=100,
+                    type=int,
+                    help="Save checkpoint every X steps (batches)")
+    parser.add_argument("--resume_step",
+                        type=int,
+                        default=0,
+                        help="Step (batch) to resume from within the epoch")
     #### end
 
 

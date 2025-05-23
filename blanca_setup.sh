@@ -51,6 +51,7 @@ python3 lite.py --data_dir "data/processed_data" \
                              --lamb 0.05 \
                              --resume_from_checkpoint model_dir/big_model_8_epoch/model \
                              --resume_epoch 8
+                             --resume_step 0
 
 #python3 eval.py \
 #                             --model_dir "./model_dir" \
