@@ -256,7 +256,7 @@ def main():
                     help="Epoch number to resume from")
     
     parser.add_argument("--save_steps",
-                    default=100,
+                    default=2000,
                     type=int,
                     help="Save checkpoint every X steps (batches)")
     parser.add_argument("--resume_step",
