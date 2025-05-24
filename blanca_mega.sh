@@ -47,7 +47,7 @@ device=0
 python3 lite.py --data_dir "data/processed_data" \
                              --output_dir "output" \
                              --train_batch_size 32 \
-                             --num_train_epochs 9 \
+                             --num_train_epochs 3 \
                              --margin 0.1 \
                              --save_epochs 1 \
                              --learning_rate 1e-6 \
