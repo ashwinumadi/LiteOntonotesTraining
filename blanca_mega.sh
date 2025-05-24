@@ -7,7 +7,7 @@
 #SBATCH --mem-per-cpu=4000m
 #SBATCH --gres=gpu:h100_7g.80gb
 #SBATCH --time=24:00:00
-#SBATCH --output=mega_gpu-%j.out
+#SBATCH --output=mega_gpu17-%j.out
 #SBATCH --mail-type="ALL"
 #SBATCH --mail-user="asum8093@colorado.edu"
 
