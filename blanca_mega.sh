@@ -6,8 +6,8 @@
 #SBATCH --ntasks=10
 #SBATCH --mem-per-cpu=4000m
 #SBATCH --gres=gpu:h100_7g.80gb
-#SBATCH --time=3-23:59:59
-#SBATCH --output=mega_gpu45-%j.out
+#SBATCH --time=5-23:59:59
+#SBATCH --output=mega_gpu66-%j.out
 #SBATCH --mail-type="ALL"
 #SBATCH --mail-user="asum8093@colorado.edu"
 
@@ -47,7 +47,7 @@ device=0
 python3 lite.py --data_dir "data/processed_data" \
                              --output_dir "output" \
                              --train_batch_size 32 \
-                             --num_train_epochs 21 \
+                             --num_train_epochs 42 \
                              --margin 0.1 \
                              --save_epochs 1 \
                              --learning_rate 1e-6 \
