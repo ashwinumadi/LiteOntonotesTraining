@@ -48,45 +48,45 @@ device=0
 #                             --type_vocab_file "./data/small_processed_data/types.txt" \
 #                             --batch 4
 
-python3 eval.py \
-                             --model_dir "./model_dir/big_model_24_epoch/" \
-                             --eval_data_path "./data/bins_processed_data/test_split_q1_processed.json" \
-                             --type_vocab_file "./data/bins_processed_data/types.txt" \
-                             --batch 4
+#python3 eval.py \
+#                             --model_dir "./model_dir/big_model_24_epoch/" \
+#                             --eval_data_path "./data/bins_processed_data/test_split_q1_processed.json" \
+#                             --type_vocab_file "./data/bins_processed_data/types.txt" \
+#                             --batch 4
 
-echo "=============== DDEV 1 ========================="
+#echo "=============== DDEV 1 ========================="
 
 
-python3 eval.py \
-                             --model_dir "./model_dir/big_model_24_epoch/" \
-                             --eval_data_path "./data/bins_processed_data/test_split_q2_processed.json" \
-                             --type_vocab_file "./data/bins_processed_data/types.txt" \
-                             --batch 4
+#python3 eval.py \
+#                             --model_dir "./model_dir/big_model_24_epoch/" \
+#                             --eval_data_path "./data/bins_processed_data/test_split_q2_processed.json" \
+#                             --type_vocab_file "./data/bins_processed_data/types.txt" \
+#                             --batch 4
 
-echo "=============== DDEV 2 ========================="
+#echo "=============== DDEV 2 ========================="
 
-python3 eval.py \
-                             --model_dir "./model_dir/big_model_24_epoch/" \
-                             --eval_data_path "./data/bins_processed_data/test_split_q3_processed.json" \
-                             --type_vocab_file "./data/bins_processed_data/types.txt" \
-                             --batch 4
+#python3 eval.py \
+#                             --model_dir "./model_dir/big_model_24_epoch/" \
+#                             --eval_data_path "./data/bins_processed_data/test_split_q3_processed.json" \
+#                             --type_vocab_file "./data/bins_processed_data/types.txt" \
+#                             --batch 4
 
-echo "=============== DDEV 3 ========================="
+#echo "=============== DDEV 3 ========================="
 
-python3 eval.py \
-                             --model_dir "./model_dir/big_model_24_epoch/" \
-                             --eval_data_path "./data/bins_processed_data/test_split_q4_processed.json" \
-                             --type_vocab_file "./data/bins_processed_data/types.txt" \
-                             --batch 4
+#python3 eval.py \
+#                             --model_dir "./model_dir/big_model_24_epoch/" \
+#                             --eval_data_path "./data/bins_processed_data/test_split_q4_processed.json" \
+#                             --type_vocab_file "./data/bins_processed_data/types.txt" \
+#                             --batch 4
 
-echo "== End of Eval code =="
+#echo "== End of Eval code =="
 
-python3 result.py --dev "./model_dir/big_model_24_epoch/Evaluation_dev_processed.json" \
-                   --test "./model_dir/big_model_24_epoch/Evaluation_test_split_q1_processed.json" \
-                   --model_dir "./model_dir/big_model_24_epoch/" \
-                   --threshold_step 0.05
+#python3 result.py --dev "./model_dir/big_model_24_epoch/Evaluation_dev_processed.json" \
+#                   --test "./model_dir/big_model_24_epoch/Evaluation_test_split_q1_processed.json" \
+#                  --model_dir "./model_dir/big_model_24_epoch/" \
+#                   --threshold_step 0.05
 
-echo "=============== TEST 1 ========================="
+#echo "=============== TEST 1 ========================="
 
 python3 result.py --dev "./model_dir/big_model_24_epoch/Evaluation_dev_processed.json" \
                    --test "./model_dir/big_model_24_epoch/Evaluation_test_split_q2_processed.json" \
