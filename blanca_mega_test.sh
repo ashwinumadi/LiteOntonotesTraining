@@ -4,7 +4,7 @@
 #SBATCH --time=24:00:00
 #SBATCH --partition=blanca-curc-gpu
 #SBATCH --gres=gpu:1
-#SBATCH --output=test_mega_4_epoch-%j.out
+#SBATCH --output=test_mega_43_epoch-%j.out
 #SBATCH --mail-type="ALL"
 #SBATCH --mail-user="asum8093@colorado.edu"
 
@@ -49,7 +49,7 @@ device=0
 #                             --batch 4
 
 python3 eval.py \
-                             --model_dir "./model_dir/big_model_4_epoch/" \
+                             --model_dir "./model_dir/big_model_43_epoch/" \
                              --eval_data_path "./data/bins_processed_data/test_split_q1_processed.json" \
                              --type_vocab_file "./data/bins_processed_data/types.txt" \
                              --batch 4
@@ -58,7 +58,7 @@ echo "=============== DDEV 1 ========================="
 
 
 python3 eval.py \
-                             --model_dir "./model_dir/big_model_4_epoch/" \
+                             --model_dir "./model_dir/big_model_43_epoch/" \
                              --eval_data_path "./data/bins_processed_data/test_split_q2_processed.json" \
                              --type_vocab_file "./data/bins_processed_data/types.txt" \
                              --batch 4
@@ -66,7 +66,7 @@ python3 eval.py \
 echo "=============== DDEV 2 ========================="
 
 python3 eval.py \
-                             --model_dir "./model_dir/big_model_4_epoch/" \
+                             --model_dir "./model_dir/big_model_43_epoch/" \
                              --eval_data_path "./data/bins_processed_data/test_split_q3_processed.json" \
                              --type_vocab_file "./data/bins_processed_data/types.txt" \
                              --batch 4
@@ -74,37 +74,37 @@ python3 eval.py \
 echo "=============== DDEV 3 ========================="
 
 python3 eval.py \
-                             --model_dir "./model_dir/big_model_4_epoch/" \
+                             --model_dir "./model_dir/big_model_43_epoch/" \
                              --eval_data_path "./data/bins_processed_data/test_split_q4_processed.json" \
                              --type_vocab_file "./data/bins_processed_data/types.txt" \
                              --batch 4
 
 echo "== End of Eval code =="
 
-python3 result.py --dev "./model_dir/big_model_24_epoch/Evaluation_dev_processed.json" \
-                   --test "./model_dir/big_model_4_epoch/Evaluation_test_split_q1_processed.json" \
-                  --model_dir "./model_dir/big_model_4_epoch/" \
+python3 result.py --dev "./model_dir/big_model_4_epoch/Evaluation_dev_processed.json" \
+                   --test "./model_dir/big_model_43_epoch/Evaluation_test_split_q1_processed.json" \
+                  --model_dir "./model_dir/big_model_43_epoch/" \
                    --threshold_step 0.05
 
 echo "=============== TEST 1 ========================="
 
-python3 result.py --dev "./model_dir/big_model_24_epoch/Evaluation_dev_processed.json" \
-                   --test "./model_dir/big_model_4_epoch/Evaluation_test_split_q2_processed.json" \
-                   --model_dir "./model_dir/big_model_4_epoch/" \
+python3 result.py --dev "./model_dir/big_model_4_epoch/Evaluation_dev_processed.json" \
+                   --test "./model_dir/big_model_43_epoch/Evaluation_test_split_q2_processed.json" \
+                   --model_dir "./model_dir/big_model_43_epoch/" \
                    --threshold_step 0.05
 
 echo "=============== TEST 2 ========================="
 
-python3 result.py --dev "./model_dir/big_model_24_epoch/Evaluation_dev_processed.json" \
-                   --test "./model_dir/big_model_4_epoch/Evaluation_test_split_q3_processed.json" \
-                   --model_dir "./model_dir/big_model_4_epoch/" \
+python3 result.py --dev "./model_dir/big_model_4_epoch/Evaluation_dev_processed.json" \
+                   --test "./model_dir/big_model_43_epoch/Evaluation_test_split_q3_processed.json" \
+                   --model_dir "./model_dir/big_model_43_epoch/" \
                    --threshold_step 0.05
 
 echo "=============== TEST 3 ========================="
 
-python3 result.py --dev "./model_dir/big_model_24_epoch/Evaluation_dev_processed.json" \
-                   --test "./model_dir/big_model_4_epoch/Evaluation_test_split_q4_processed.json" \
-                   --model_dir "./model_dir/big_model_4_epoch/" \
+python3 result.py --dev "./model_dir/big_model_4_epoch/Evaluation_dev_processed.json" \
+                   --test "./model_dir/big_model_43_epoch/Evaluation_test_split_q4_processed.json" \
+                   --model_dir "./model_dir/big_model_43_epoch/" \
                    --threshold_step 0.05
 
 echo "=============== TEST 4 ========================="
