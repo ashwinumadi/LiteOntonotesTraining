@@ -17,7 +17,8 @@ import argparse
 def eval(args, eval_dataset, model, tokenizer):
     curr_time = time.strftime("%H_%M_%S_%b_%d_%Y", time.localtime())
     eval_sampler = SequentialSampler(eval_dataset)
-    eval_dataloader = DataLoader(eval_dataset, sampler=eval_sampler, batch_size=1, collate_fn=lambda x: zip(*x))
+    #eval_dataloader = DataLoader(eval_dataset, sampler=eval_sampler, batch_size=1, collate_fn=lambda x: zip(*x))
+    eval_dataloader = DataLoader(eval_dataset, sampler=eval_sampler, batch_size=args.batch, collate_fn=lambda x: zip(*x))
     type_vocab = eval_dataset.label_lst
 
     eval_res = []
