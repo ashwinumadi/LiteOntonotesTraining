@@ -11,17 +11,15 @@
 
 module purge
 
-echo "loading anaconda"
+
 module load anaconda
-
-echo "loading cuda"
 module load cuda/12.1.1
+#cd /scratch/alpine/asum8093/LiteOntonotesTraining/LiteOntonotesTraining/data/
+cd /scratch/alpine/asum8093/LiteOntonotesTraining/LiteOntonotesTraining/
 
-echo "activating entity_typing"
-conda activate entity_typing
+conda activate py38-pt1131-cuda117
 
-echo "changing directory"
-cd /scratch/alpine/adde1214/lite
+echo "== This is the scripting step! =="
 
 # model_dir="output/12_03_11_Mar_31_2025_batch32_margin0.1_lr1e-06lambda0.05/epochs17"
 # eval_data_path="data/processed_data/g_dev_processed.json"
